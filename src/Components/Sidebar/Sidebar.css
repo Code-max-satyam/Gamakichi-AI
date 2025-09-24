@@ -1,0 +1,116 @@
+.sidebar{
+    min-height: 100vh;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(29, 155, 218);
+    padding: 25px 15px;
+}
+
+.sidebar img{
+    width: 25px;
+}
+.sidebar .menu{
+    display: block;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.sidebar .new-chat{
+    margin-top: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background-color: rgb(217, 163, 221);
+    border-radius: 50px;
+    font-size: 15px;
+    color: black;
+    cursor: pointer;
+    animation: fadeIn 1.4s;
+}
+
+.sidebar .recent{
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 1.6s;
+}
+.sidebar .recent{
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .recent-title{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.sidebar .recent-entry{
+    display: flex;
+    align-items: start;
+    gap: 10px;
+    padding: 10px;
+    padding-right: 40px;
+    border-radius: 50px;
+    color: #282828;
+    cursor: pointer;
+}
+
+.sidebar .recent-entry:hover{
+    background-color: coral;
+}
+
+.sidebar .bottom{
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .bottom-item{
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+/* Media Query for Mobile View */
+@media (max-width: 768px) {
+  .sidebar {
+    min-height: auto; /* No longer a full-height column */
+    height: 60px; /* Fixed height for the top bar */
+    flex-direction: row; /* Arranges items horizontally */
+    justify-content: flex-start; /* Aligns items to the left */
+    align-items: center; /* Centers items vertically */
+    padding: 0 20px;
+    position: fixed; /* Sticks the bar to the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: var(--secondary-bg);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .sidebar .top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .sidebar .menu {
+    margin-left: 0;
+  }
+  
+  .sidebar .new-chat {
+    margin-top: 0;
+    padding: 8px 12px;
+  }
+
+  /* Hide the recent chats and bottom items on mobile for a clean look */
+  .sidebar .recent, .sidebar .bottom {
+    display: none;
+  }
+
+  /* Ensure the main content doesn't get hidden under the top bar */
+  body {
+    padding-top: 60px;
+  }
+}
