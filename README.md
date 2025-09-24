@@ -1,12 +1,72 @@
-# React + Vite
+# 🐸 Gamakichi AI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Gamakichi AI is a **Gemini-powered conversational AI clone** built with **React + Vite** and **Google AI Gemini API**.  
+It provides an interactive chat experience similar to modern AI chatbots, with a clean UI and real-time responses.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- ⚡ **Fast & Modern UI** – Built using React + Vite + CSS  
+- 🤖 **Google Gemini API** – Powered by `@google/generative-ai`  
+- 🔒 **Secure API Key Handling** – Uses `.env` for environment variables  
+- 🎨 **Customizable** – Easy to modify UI & chat flow  
+- 🌐 **Deployed on Vercel** – One-click deployment for live demo  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📸 Preview
+
+<img width="1916" height="936" alt="Screenshot 2025-09-24 152748" src="https://github.com/user-attachments/assets/a62b09a9-7afe-4865-b6b6-b0959c32626b" />
+
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally:
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/gamakichi-ai.git
+cd gamakichi-ai
+2. Install Dependencies
+bash
+Copy code
+npm install
+3. Add Environment Variable
+Create a .env file in the root folder and add your Google Gemini API key:
+
+env
+Copy code
+VITE_GEMINI_API_KEY=your_api_key_here
+4. Run Development Server
+bash
+Copy code
+npm run dev
+Your app will be live at http://localhost:5173
+
+🛠️ Tech Stack
+Frontend: React, Vite, CSS
+
+AI Engine: Google AI Gemini API (@google/generative-ai)
+
+Deployment: Vercel
+
+📦 Deployment
+Push your code to GitHub
+
+Go to Vercel → Import Project
+
+Add your VITE_GEMINI_API_KEY in Environment Variables
+
+Deploy 🚀
+
+🤝 Contributing
+Contributions, issues, and feature requests are welcome!
+Feel free to fork the repo and submit a PR.
+
+
+💡 Inspiration
+The project is named Gamakichi AI 🐸 inspired by Naruto’s toad Gamakichi –
+small but powerful, just like this lightweight AI chatbot!
