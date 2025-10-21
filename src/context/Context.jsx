@@ -5,87 +5,77 @@ export const Context = createContext();
 
 const ContextProvider = (props) => {
 
-    const [input,setInput] = useState("");
-    const [recentPrompt,setRecentPrompt] = useState("");
-    const [prevPrompts,setPrevPrompts] = useState([]);
-    const [showResult,setShowResult] = useState(false);
-    const [loading,setLoading] = useState(false);
-    const [resultData,setResultData] = useState("");
+    const [input, setInput] = useState("");
+    const [recentPrompt, setRecentPrompt] = useState("");
+    const [prevPrompts, setPrevPrompts] = useState([]);
+    const [showResult, setShowResult] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [resultData, setResultData] = useState("");
 
-    const delayPara = (index,nextWord) => {
-        setTimeout(function () {
-            setResultData(prev=>prev+nextWord);
-        },75*index);
+    // Typewriter effect for AI response
+    const delayPara = (index, nextWord) => {
+        setTimeout(() => {
+            setResultData(prev => prev + nextWord);
+        }, 40 * index); // Adjust speed here
     }
 
     const newChat = () => {
-        setLoading(false)
-        setShowResult(false)
+        setLoading(false);
+        setShowResult(false);
+        setResultData("");
+        setInput("");
     }
 
     const onSent = async (prompt) => {
-
-        // Store the prompt to be used, whether it's from a card click or the input field
         const currentPrompt = prompt !== undefined ? prompt : input;
+        if (!currentPrompt.trim()) return;
 
-        setResultData("")
-        setLoading(true)
-        setShowResult(true)
-        
-        // Add the current prompt to the list of previous prompts
-        // This will now work for both card clicks and input submissions
-        if (currentPrompt) {
-            setPrevPrompts(prev => [...prev, currentPrompt]);
-        }
-
+        setResultData("");
+        setLoading(true);
+        setShowResult(true);
         setRecentPrompt(currentPrompt);
 
-        const response = await runChat(currentPrompt);
+        setPrevPrompts(prev => [...prev, currentPrompt]);
 
-        // Fixed: Initializing newResponse to an empty string to avoid "undefined"
-        let newResponse = ""; 
-        let responseArray = response.split("**");
-        
-        for(let i =0; i < responseArray.length; i++)
-        {
-           if (i === 0 || i % 2 !== 1) {
-             newResponse += responseArray[i];
-           }
-           else{
-             newResponse += "<b>"+responseArray[i]+"</b>";
-           }
+        try {
+            const response = await runChat(currentPrompt);
+
+            // Process bold and line breaks
+            let formatted = "";
+            let responseArray = response.split("**");
+            for (let i = 0; i < responseArray.length; i++) {
+                if (i % 2 === 1) formatted += `<b>${responseArray[i]}</b>`;
+                else formatted += responseArray[i];
+            }
+            formatted = formatted.split("*").join("<br>");
+            const words = formatted.split(" ");
+
+            words.forEach((word, index) => delayPara(index, word + " "));
+
+        } catch (err) {
+            setResultData("Error: Could not get response.");
+            console.error(err);
+        } finally {
+            setLoading(false);
+            setInput("");
         }
-        let newResponse2 = newResponse.split("*").join("</br>");
-        let newResponseArray = newResponse2.split(" ");
-        for (let i=0; i<newResponseArray.length; i++)
-        {
-            const nextWord = newResponseArray[i];
-            delayPara(i,nextWord+ " ")
-        }
-
-        setLoading(false)
-        setInput("")
-    }
-
-    const contextValue = {
-        prevPrompts,
-        setPrevPrompts,
-        onSent,
-        setRecentPrompt,
-        recentPrompt,
-        showResult,
-        loading,
-        resultData,
-        input,
-        setInput,
-        newChat
     }
 
     return (
-        <Context.Provider value={contextValue}>
+        <Context.Provider value={{
+            prevPrompts,
+            onSent,
+            recentPrompt,
+            showResult,
+            loading,
+            resultData,
+            input,
+            setInput,
+            newChat
+        }}>
             {props.children}
         </Context.Provider>
     )
 }
 
-export default ContextProvider
+export default ContextProvider;
